@@ -8,15 +8,27 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'lib'),
     publicPath: 'dist',
-    filename: 'index.js'
+    filename: 'index.js',
+    chunkFilename: '[id].js',
+    library: 'EVA',
+    libraryTarget: 'umd',
+    libraryExport: 'default',
+    umdNamedDefine: true
+  },
+  resolve: {
+
+  },
+  externals: {
+    vue: {
+      root: 'Vue',
+      commonjs: 'vue',
+      commonjs2: 'vue',
+      amd: 'vue'
+    }
   },
   optimization: {
     minimizer: [
-      new TerserPlugin({
-        terserOptions: {
-
-        }
-      })
+      new TerserPlugin()
     ]
   },
   module: {
@@ -26,7 +38,7 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           compilerOptions: {
-
+            preserveWhitespace: false
           }
         }
       }
